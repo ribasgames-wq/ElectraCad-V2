@@ -1,0 +1,167 @@
+{
+  "formato": "electracad-projeto",
+  "versao": 1,
+  "unidade": "m",
+  "nome": "Exemplo casa",
+  "paredes": [
+    {
+      "pontos": [
+        [
+          0,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          10,
+          8
+        ],
+        [
+          0,
+          8
+        ]
+      ],
+      "fechada": true
+    },
+    {
+      "pontos": [
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    }
+  ],
+  "ambientes": [
+    {
+      "nome": "SALA",
+      "x": 1,
+      "y": 6.5
+    },
+    {
+      "nome": "COZINHA",
+      "x": 6,
+      "y": 6.5
+    }
+  ],
+  "simbolos": [
+    {
+      "tipo": "luz_teto",
+      "x": 2.5,
+      "y": 4,
+      "circuito": "C1"
+    },
+    {
+      "tipo": "luz_teto",
+      "x": 7.5,
+      "y": 4,
+      "circuito": "C1"
+    },
+    {
+      "tipo": "int_1s",
+      "x": 4.6,
+      "y": 1,
+      "circuito": "C1"
+    },
+    {
+      "tipo": "tomada_baixa",
+      "x": 0.2,
+      "y": 3,
+      "rotacao": 90,
+      "circuito": "C2"
+    },
+    {
+      "tipo": "tomada_baixa",
+      "x": 9.8,
+      "y": 3,
+      "rotacao": 270,
+      "circuito": "C2"
+    },
+    {
+      "tipo": "tue",
+      "x": 9.8,
+      "y": 6,
+      "rotacao": 270,
+      "circuito": "C3"
+    },
+    {
+      "tipo": "quadro_dist",
+      "x": 0.6,
+      "y": 7.4
+    }
+  ],
+  "eletrodutos": [
+    {
+      "tipo": "teto",
+      "pontos": [
+        [
+          2.5,
+          4
+        ],
+        [
+          4.6,
+          4
+        ],
+        [
+          4.6,
+          1
+        ]
+      ]
+    },
+    {
+      "tipo": "teto",
+      "pontos": [
+        [
+          4.6,
+          4
+        ],
+        [
+          7.5,
+          4
+        ]
+      ]
+    },
+    {
+      "tipo": "piso",
+      "pontos": [
+        [
+          0.6,
+          7.4
+        ],
+        [
+          0.2,
+          3
+        ]
+      ]
+    }
+  ],
+  "circuitos": [
+    {
+      "nome": "Iluminação",
+      "tipo": "Iluminação",
+      "tensao": 127,
+      "fases": "F+N",
+      "potencia_va": 400
+    },
+    {
+      "nome": "Tomadas gerais",
+      "tipo": "TUG",
+      "tensao": 127,
+      "fases": "F+N",
+      "potencia_va": 1800
+    },
+    {
+      "nome": "Forno elétrico",
+      "tipo": "TUE",
+      "tensao": 220,
+      "fases": "F+F",
+      "potencia_va": 3000
+    }
+  ]
+}
