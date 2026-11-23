@@ -1,0 +1,30 @@
+name: Instaladores
+on:
+  workflow_dispatch:
+jobs:
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Compilar LibreDWG
+        run: |
+          git clone --depth 1 https://github.com/LibreDWG/libredwg.git
+          cmake -S libredwg -B lw -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DLIBREDWG_DISABLE_JSON=ON -DDISABLE_WERROR=ON -DENABLE_LTO=OFF
+          cmake --build lw --target dwg2dxf dxf2dwg -j4
+          mkdir -p bin
+          cp "$(find lw -type f -name dwg2dxf | head -1)" bin/
+          cp "$(find lw -type f -name dxf2dwg | head -1)" bin/
+          cp libredwg/COPYING bin/LibreDWG-LICENSE.txt
+      - name: Gerar o aplicativo e o DMG
+        run: |
+          iconutil -c icns assets/ElectraCad.iconset -o assets/ElectraCad.icns
+          pip install -r requirements.txt
+          pyinstaller --noconfirm --windowed --name ElectraCad --osx-bundle-identifier br.electracad.app \
+            --icon assets/ElectraCad.icns --add-data "assets:assets" --add-binary "bin/dwg2dxf:bin" --add-binary "bin/dxf2dwg:bin" \
+            --add-data "bin/LibreDWG-LICENSE.txt:bin" electracad.py
+          mkdir dmg && cp -R dist/ElectraCad.app dmg/ && ln -s /Applications dmg/Applications
+          hdiutil create -volname ElectraCad -srcfolder dmg -ov -format UDZO ElectraCad.dmg
+      - uses: actions/upload-artifact@v4
+        with: { name: ElectraCad-Mac, path: ElectraCad.dmg }
